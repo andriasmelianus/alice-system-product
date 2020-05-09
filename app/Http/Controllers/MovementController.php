@@ -103,7 +103,7 @@ class MovementController extends Controller
      * @param Request $request
      * @return void
      */
-    public function destroy(Request $request){
+    public function delete(Request $request){
         $movement = Movement::findOrFail($request->input('id'));
         $movement->delete();
 
@@ -174,7 +174,7 @@ class MovementController extends Controller
      * @param Request $request
      * @return Array
      */
-    public function destroyDetail(Request $request){
+    public function deleteDetail(Request $request){
         $movementDetail = MovementDetail::findOrFail($request->movement_id);
         $movementDetail->delete();
 

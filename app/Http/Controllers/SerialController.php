@@ -73,7 +73,7 @@ class SerialController extends Controller {
      * @param Request $request
      * @return Array
      */
-    public function destroy(Request $request){
+    public function delete(Request $request){
         $serial = Serial::findOrFail($request->id);
         $serial->delete();
 

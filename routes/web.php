@@ -20,7 +20,7 @@ $router->post('product', 'ProductController@create');
 $router->get('product', 'ProductController@read');
 $router->put('product', 'ProductController@update');
 $router->patch('product', 'ProductController@update');
-$router->delete('product', 'ProductController@destroy');
+$router->delete('product', 'ProductController@delete');
 
 // Brand
 $router->get('brand', 'BrandController@get');
@@ -42,7 +42,7 @@ $router->get('movement', 'MovementController@read');
 // Movement hanya bisa dibaca, ditambah dan disoft-delete!
 // $router->put('movement', 'MovementController@update');
 // $router->patch('movement', 'MovementController@update');
-$router->delete('movement', 'MovementController@destroy');
+$router->delete('movement', 'MovementController@delete');
 $router->group(['prefix'=>'movement'], function() use($router) {
     // Movement Type
     $router->get('type', 'MovementController@readType');
@@ -52,14 +52,14 @@ $router->group(['prefix'=>'movement'], function() use($router) {
     $router->get('detail', 'MovementController@readDetail');
     $router->put('detail', 'MovementController@updateDetail');
     $router->patch('detail', 'MovementController@updateDetail');
-    $router->delete('detail', 'MovementController@destroyDetail');
+    $router->delete('detail', 'MovementController@deleteDetail');
 
     // Movement Serial
     $router->post('serial', 'SerialController@create');
     $router->get('serial', 'SerialController@read');
     $router->put('serial', 'SerialController@update');
     $router->patch('serial', 'SerialController@update');
-    $router->delete('serial', 'SerialController@destroy');
+    $router->delete('serial', 'SerialController@delete');
 
     /**
      * Proses alokasi stok dilakukan menggunakan
@@ -71,5 +71,5 @@ $router->group(['prefix'=>'movement'], function() use($router) {
     // $router->get('allocation', 'AllocationController@read');
     // $router->put('allocation', 'AllocationController@update');
     // $router->patch('allocation', 'AllocationController@update');
-    // $router->delete('allocation', 'AllocationController@destroy');
+    // $router->delete('allocation', 'AllocationController@delete');
 });

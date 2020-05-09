@@ -159,7 +159,7 @@ class ProductController extends Controller
      * @param Request $request
      * @return void
      */
-    public function destroy(Request $request){
+    public function delete(Request $request){
         $product = Product::findOrFail($request->input('id'));
         $product->delete();
 
