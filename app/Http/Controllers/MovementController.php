@@ -24,6 +24,7 @@ class MovementController extends Controller
         'user' => 'max:127',
     ];
     private $movementDetailRules = [
+        'movement_id' => 'required|integer',
         'color' => 'max:127',
         'weight' => 'integer',
         'length' => 'integer',

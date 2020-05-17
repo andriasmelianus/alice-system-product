@@ -29,6 +29,7 @@ class ProductController extends Controller
     private $uploadedImageIconPath = 'images/icon/';
     private $uploadedImageSmallPath = 'images/small/';
     private $uploadedImageMediumPath = 'images/medium/';
+    private $uploadedImageLargePath = 'images/large/';
     private $uploadedImageOriginalPath = 'images/original/';
 
     /**
@@ -185,11 +186,11 @@ class ProductController extends Controller
         // Dapatkan nama file yang asli
         $uploadedImageFilename = $uploadedOriginalImage->getClientOriginalName();
         // Pindahkan image yang diupload pada folder yang disediakan
-        $uploadedOriginalImage->move('images/original/', $uploadedImageFilename);
-        $uploadedIconImage->move('images/icon/', $uploadedImageFilename);
-        $uploadedSmallImage->move('images/small/', $uploadedImageFilename);
-        $uploadedMediumImage->move('images/medium/', $uploadedImageFilename);
-        $uploadedLargeImage->move('images/large/', $uploadedImageFilename);
+        $uploadedOriginalImage->move($this->uploadedImageOriginalPath, $uploadedImageFilename);
+        $uploadedIconImage->move($this->uploadedImageIconPath, $uploadedImageFilename);
+        $uploadedSmallImage->move($this->uploadedImageSmallPath, $uploadedImageFilename);
+        $uploadedMediumImage->move($this->uploadedImageMediumPath, $uploadedImageFilename);
+        $uploadedLargeImage->move($this->uploadedImageLargePath, $uploadedImageFilename);
 
         $imageData = [
             'product_id' => $request->product_id,

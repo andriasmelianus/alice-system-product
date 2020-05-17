@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class MovementDetail extends Model {
 
     /**
+     * Primary key pada tabel ini merupakan foreign key dari tabel movements.
+     */
+    protected $primaryKey = 'movement_id';
+
+    /**
      * Kolom-kolom yang dapat diisi
      */
     protected $fillable = [
@@ -22,6 +27,7 @@ class MovementDetail extends Model {
         'size',
         'model',
         'note',
+        'user',
     ];
 
     /**
