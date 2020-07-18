@@ -13,7 +13,7 @@
 
 $router->get('/', function () use ($router) {
     // return $router->app->version();
-    return 'Welcome to the '.env('APP_NAME').'!';
+    return 'Welcome to the ' . env('APP_NAME') . '!';
 });
 
 $router->post('product', 'ProductController@create');
@@ -24,6 +24,8 @@ $router->delete('product', 'ProductController@delete');
 
 // Brand
 $router->get('brand', 'BrandController@get');
+// Unit
+$router->get('unit', 'UnitController@get');
 // Category
 $router->post('category', 'CategoryController@add');
 $router->get('category', 'CategoryController@get');
@@ -43,7 +45,7 @@ $router->get('movement', 'MovementController@read');
 // $router->put('movement', 'MovementController@update');
 // $router->patch('movement', 'MovementController@update');
 $router->delete('movement', 'MovementController@delete');
-$router->group(['prefix'=>'movement'], function() use($router) {
+$router->group(['prefix' => 'movement'], function () use ($router) {
     // Movement Type
     $router->get('type', 'MovementController@readType');
 
