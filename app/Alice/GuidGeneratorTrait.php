@@ -1,17 +1,19 @@
 <?php
+
 namespace App\Alice;
 
-trait GuidGeneratorTrait {
+trait GuidGeneratorTrait
+{
     /**
-    * Returns a GUIDv4 string
-    *
-    * Uses the best cryptographically secure method
-    * for all supported pltforms with fallback to an older,
-    * less secure version.
-    *
-    * @param bool $trim
-    * @return string
-    */
+     * Returns a GUIDv4 string
+     *
+     * Uses the best cryptographically secure method
+     * for all supported pltforms with fallback to an older,
+     * less secure version.
+     *
+     * @param bool $trim
+     * @return string
+     */
     public function newGuid($trim = true)
     {
         // Windows
@@ -31,18 +33,18 @@ trait GuidGeneratorTrait {
         }
 
         // Fallback (PHP 4.2+)
-        mt_srand((double)microtime() * 10000);
+        mt_srand((float)microtime() * 10000);
         $charid = strtolower(md5(uniqid(rand(), true)));
         $hyphen = chr(45);                  // "-"
         $lbrace = $trim ? "" : chr(123);    // "{"
         $rbrace = $trim ? "" : chr(125);    // "}"
-        $guidv4 = $lbrace.
-                substr($charid,  0,  8).$hyphen.
-                substr($charid,  8,  4).$hyphen.
-                substr($charid, 12,  4).$hyphen.
-                substr($charid, 16,  4).$hyphen.
-                substr($charid, 20, 12).
-                $rbrace;
+        $guidv4 = $lbrace .
+            substr($charid,  0,  8) . $hyphen .
+            substr($charid,  8,  4) . $hyphen .
+            substr($charid, 12,  4) . $hyphen .
+            substr($charid, 16,  4) . $hyphen .
+            substr($charid, 20, 12) .
+            $rbrace;
         return $guidv4;
     }
 }

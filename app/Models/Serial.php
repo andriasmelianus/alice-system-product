@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Serial extends Model {
+class Serial extends Model
+{
 
     /**
      * Kolom-kolom yang dapat diisi
@@ -17,7 +18,8 @@ class Serial extends Model {
     /**
      * Relationship many-to-one pada tabel movement.
      */
-    public function movement(){
+    public function movement()
+    {
         return $this->belongsTo('App\Models\Movement');
     }
 }

@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model {
+class Category extends Model
+{
     /**
      * Kolom-kolom yang dapat diisi
      */
@@ -16,7 +17,8 @@ class Category extends Model {
     /**
      * Relationship one-to-many pada tabel product.
      */
-    public function products(){
+    public function products()
+    {
         return $this->belongsToMany('App\Models\Product');
     }
 }

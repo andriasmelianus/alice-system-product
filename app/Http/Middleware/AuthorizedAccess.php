@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Response;
@@ -15,10 +16,10 @@ class AuthorizedAccess
      */
     public function handle($request, Closure $next)
     {
-		$validSecrets = explode(',', env('ALLOWED_SECRETS'));
-		if(in_array($request->bearerToken(), $validSecrets)){
-			return $next($request);
-		}
+        $validSecrets = explode(',', env('ALLOWED_SECRETS'));
+        if (in_array($request->bearerToken(), $validSecrets)) {
+            return $next($request);
+        }
 
         abort(Response::HTTP_UNAUTHORIZED);
     }

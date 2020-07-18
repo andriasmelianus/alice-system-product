@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MovementDetail extends Model {
+class MovementDetail extends Model
+{
 
     /**
      * Primary key pada tabel ini merupakan foreign key dari tabel movements.
@@ -33,7 +34,8 @@ class MovementDetail extends Model {
     /**
      * Mendapatkan data movement
      */
-    public function movement(){
+    public function movement()
+    {
         return $this->belongsTo('App\Models\Movement');
     }
 }

@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model {
+class Image extends Model
+{
 
     /**
      * Kolom-kolom yang dapat diisi
@@ -20,7 +21,8 @@ class Image extends Model {
     /**
      * Relationship many-to-one pada tabel product.
      */
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo('App\Models\Product');
     }
 }

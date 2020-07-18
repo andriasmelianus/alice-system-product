@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Alice\ApiResponser;
@@ -7,7 +8,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
     private $apiResponser;
     private $product;
     private $category;
@@ -15,7 +17,8 @@ class CategoryController extends Controller {
     /**
      * Create controller instance
      */
-    public function __construct(ApiResponser $apiResponser, Product $product, Category $category){
+    public function __construct(ApiResponser $apiResponser, Product $product, Category $category)
+    {
         $this->apiResponser = $apiResponser;
         $this->product = $product;
         $this->category = $category;
@@ -29,7 +32,8 @@ class CategoryController extends Controller {
      * @param Request $request
      * @return Boolean
      */
-    public function add(Request $request){
+    public function add(Request $request)
+    {
         $category = $this->category->firstOrCreate([
             'name' => $request->category
         ]);
@@ -47,8 +51,9 @@ class CategoryController extends Controller {
      * @param Request $request
      * @return Array
      */
-    public function get(Request $request){
-        $categories = $this->category->where('name', 'LIKE', $request->keyword.'%')->get();
+    public function get(Request $request)
+    {
+        $categories = $this->category->where('name', 'LIKE', '%' . $request->keyword . '%')->get();
         return $this->apiResponser->success($categories);
     }
 
@@ -59,7 +64,8 @@ class CategoryController extends Controller {
      * @param Request $request
      * @return Boolean
      */
-    public function remove(Request $request){
+    public function remove(Request $request)
+    {
         $product = $this->product->where('id', $request->product_id)->first();
         $product->categories()->detach($request->id);
 

@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Unit extends Model {
+class Unit extends Model
+{
 
     /**
      * Kolom-kolom yang dapat diisi
@@ -17,7 +18,8 @@ class Unit extends Model {
     /**
      * Relationship one-to-many pada tabel product.
      */
-    public function products(){
+    public function products()
+    {
         return $this->hasMany('App\Models\Product');
     }
 }

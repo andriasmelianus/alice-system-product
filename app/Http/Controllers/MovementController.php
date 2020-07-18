@@ -44,7 +44,8 @@ class MovementController extends Controller
      *
      * @return void
      */
-    public function __construct(ApiResponser $apiResponser, Movement $movement, MovementDetail $movementDetail){
+    public function __construct(ApiResponser $apiResponser, Movement $movement, MovementDetail $movementDetail)
+    {
         $this->apiResponser = $apiResponser;
         $this->movement = $movement;
         $this->movementDetail = $movementDetail;
@@ -56,7 +57,8 @@ class MovementController extends Controller
      * @param Request $request
      * @return Json
      */
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $this->validate($request, $this->rules);
         $movementData = $request->all();
         $movement = Movement::create($movementData);
@@ -70,12 +72,23 @@ class MovementController extends Controller
      * @param Request $request
      * @return void
      */
-    public function read(Request $request){
-        $movements = \DB::table('v_movements')->where('product_id', $request->product_id)
-            ->whereBetween('date', [$request->date_start, $request->date_end])
-            ->get();
+    public function read(Request $request)
+    {
+        // $movements = \DB::table('v_movements')->where('product_id', $request->product_id)
+        //     ->whereBetween('date', [$request->date_start, $request->date_end])
+        //     ->get();
 
-        return $this->apiResponser->success($movements);
+        // return $this->apiResponser->success($movements);
+
+        $movements = \DB::table('v_movements');
+        $movements->where('product_id', $request->product_id);
+        $movements->whereNull('deleted_at');
+
+        if (isset($request->sortBy)) {
+            $movements->orderBy($request->sortBy[0], ($request->sortDesc[0] == 'true' ? 'desc' : 'asc'));
+        }
+
+        return $this->apiResponser->success($movements->paginate($request->itemsPerPage));
     }
 
     /**
@@ -104,7 +117,8 @@ class MovementController extends Controller
      * @param Request $request
      * @return void
      */
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $movement = Movement::findOrFail($request->input('id'));
         $movement->delete();
 
@@ -116,7 +130,8 @@ class MovementController extends Controller
      *
      * @return Array
      */
-    public function readType(){
+    public function readType()
+    {
         $movementTypes = MovementType::all();
 
         return $this->apiResponser->success($movementTypes);
@@ -129,7 +144,8 @@ class MovementController extends Controller
      * @param Request $request
      * @return Array
      */
-    public function createDetail(Request $request){
+    public function createDetail(Request $request)
+    {
         $this->validate($request, $this->movementDetailRules);
         $movementDetail = MovementDetail::create($request->all());
 
@@ -143,7 +159,8 @@ class MovementController extends Controller
      * @param Request $request
      * @return Array
      */
-    public function readDetail(Request $request){
+    public function readDetail(Request $request)
+    {
         $movementDetail = $this->movementDetail->where('movement_id', $request->movement_id)->first();
 
         return $this->apiResponser->success($movementDetail);
@@ -155,14 +172,15 @@ class MovementController extends Controller
      * @param Request $request
      * @return Array
      */
-    public function updateDetail(Request $request){
+    public function updateDetail(Request $request)
+    {
         $this->validate($request, $this->movementDetailRules);
 
         $movementDetail = MovementDetail::findOrFail($request->movement_id);
         $movementDetail->fill($request->all());
 
-        if($movementDetail->isClean()){
-            return $this->errorResponse('Tidak ada perubahan data', Response::HTTP_UNPROCESSABLE_ENTITY);
+        if ($movementDetail->isClean()) {
+            return $this->apiResponser->error('Tidak ada perubahan data', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $movementDetail->save();
@@ -175,7 +193,8 @@ class MovementController extends Controller
      * @param Request $request
      * @return Array
      */
-    public function deleteDetail(Request $request){
+    public function deleteDetail(Request $request)
+    {
         $movementDetail = MovementDetail::findOrFail($request->movement_id);
         $movementDetail->delete();
 

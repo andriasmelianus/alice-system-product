@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Allocation extends Model {
+class Allocation extends Model
+{
 
     /**
      * Kolom-kolom yang dapat diisi
@@ -18,14 +19,16 @@ class Allocation extends Model {
     /**
      * Relationship many-to-one pada tabel movement.
      */
-    public function movement_start(){
+    public function movement_start()
+    {
         return $this->belongsTo('App\Models\Movement', 'movement_id_start');
     }
 
     /**
      * Relationship many-to-one pada tabel movement.
      */
-    public function movement_end(){
+    public function movement_end()
+    {
         return $this->belongsTo('App\Models\Movement', 'movement_id_end');
     }
 }

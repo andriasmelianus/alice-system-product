@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Movement extends Model {
+class Movement extends Model
+{
     use SoftDeletes;
 
     /**
@@ -26,44 +27,51 @@ class Movement extends Model {
     /**
      * Mendapatkan data detil dari sebuah movement
      */
-    public function detail(){
+    public function detail()
+    {
         return $this->hasOne('App\Models\MovementDetail');
     }
 
     /**
      * Relationship many-to-one pada tabel product.
      */
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo('App\Models\Product');
     }
 
     /**
      * Relationship one-to-many pada tabel serial.
      */
-    public function serials(){
+    public function serials()
+    {
         return $this->hasMany('App\Models\Serial');
     }
 
     /**
      * Relationship one-to-many pada tabel allocation.
      */
-    public function allocationStart(){
+    public function allocationStart()
+    {
         return $this->hasMany('App\Models\Allocation', 'movement_id_start');
     }
 
     /**
      * Relationship one-to-many pada tabel allocation.
      */
-    public function allocationEnd(){
+    public function allocationEnd()
+    {
         return $this->hasMany('App\Models\Allocation', 'movement_id_end');
     }
 
 
     // SCOPES
-    public function scopeBranch($query, $branchId){
+    public function scopeBranch($query, $branchId)
+    {
         return $query->where('branch_id', $branchId);
     }
-    public function scopeProduct($query, $productId){
+    public function scopeProduct($query, $productId)
+    {
         return $query->where('product_id', $productId);
     }
 }
